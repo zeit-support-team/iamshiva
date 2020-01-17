@@ -12,43 +12,38 @@ var game = {
   }
 
   var darkColor = "#2c3e50";
-  
+
   var $narrativeFour = $("#game-narrative-four");
 
-  var computerThreats = ["&#128514; &#128514; &#128514; &#128514; &#128514;",
-                        "&#128520; &#128520; &#128520; &#128520; &#128520;",
-                        "&#128525; &#128525; &#128525; &#128525; &#128525;",
-                        "&#128526; &#128526; &#128526; &#128526; &#128526;",
-                        "&#128545; &#128545; &#128545; &#128545; &#128545;",
-                        "&#128540; &#128540; &#128540; &#128540; &#128540;",
-                        "&#128526; &#128526; &#128526; &#128526; &#128526;",
-                        "&#129300; &#129300; &#129300; &#129300; &#129300;" ]
+  var computerThreats = ["&#128514; &#128514; &#128514; &#128514; &#128514; &#128514;",
+                        "&#128520; &#128520; &#128520; &#128520; &#128520; &#128520;",
+                        "&#128525; &#128525; &#128525; &#128525; &#128525; &#128525;",
+                        "&#128526; &#128526; &#128526; &#128526; &#128526; &#128526;",
+                        "&#128545; &#128545; &#128545; &#128545; &#128545; &#128545;",
+                        "&#128540; &#128540; &#128540; &#128540; &#128540; &#128540;",
+                        "&#128526; &#128526; &#128526; &#128526; &#128526; &#128526;",
+                        "&#129300; &#129300; &#129300; &#129300; &#129300; &#129300;" ]
 
   var $identityBtn = $(".identity-cell");
   var $gameBtn = $(".game-cell");
   var $gameResetBtn = $("#game-reset-btn");
 
-  $(document).ready(function() { 
+  $(document).ready(function() {
     $narrativeFour.hide();
-    // $("#header").hide();
-    $("#game-configuration").hide();
+    // $("#game-configuration").hide();
     $("#game-grid").hide();
     $("#game-over").hide();
-    
-    $narrativeOne.fadeIn(500);
-  });
-  
-  // When a player initially chooses their mark before playing.
-  $identityBtn.on('click', function() {
 
-    // Grabbing value from the HTML element
+  });
+
+  $identityBtn.on('click', function() { // select label
     game.playerMark = $(this).attr("value");
     if (game.playerMark === "X"){
       game.aiMark = "O";
     } else {
       game.aiMark = "X";
     }
-    
+
     startGame();
   });
 
@@ -56,7 +51,7 @@ var game = {
     // Transitioning between config menu to game grid.
     $("#game-configuration").hide();
     $("#game-grid").fadeIn(500);
-    
+
     if (!game.playerTurn)
       aiPlay();
   }
@@ -81,23 +76,23 @@ var game = {
   });
 
   function aiPlay() {
-    var aiThinkingDelay = 1000;
+    var aiThinkingDelay = 500;
     setTimeout(function() {
-      
+
       minimax(game, 0); // Use minimax to calculate the next optimal move.
       makePlay(game.aiMark, game.nextMove[0], game.nextMove[1]); // Commit move to the game board.
       checkPlay(game.aiMark); // Check if the move resulted in a win.
-      
+
       var randThreat = computerThreats[Math.floor(Math.random() * computerThreats.length)];
-      $("#computer-threat-text").text(randThreat);
+      $("#computer-threat-text").html(randThreat);
       $("#computer-threat-text").fadeIn(250);
       setTimeout(function() {
         $("#computer-threat-text").fadeOut(250);
-      }, 2000);
-      
+      }, 3000);
+
     }, aiThinkingDelay);
-    
-    
+
+
   }
 
   function checkPlay(mark) {
@@ -106,16 +101,16 @@ var game = {
       const gameOverDelay = 2000; // Wait two second to allow win animation to play out.
       // Turn has resulted in a valid win
       setTimeout(function() {
-        gameOver(mark); // After delay, transition to game-over menu.   
+        gameOver(mark); // After delay, transition to game-over menu.
       }, gameOverDelay);
-      
+
     } else if (game.turnsPlayed >= 9) {
       // There are no more turns that can be made, it is a draw.
       // Draw animation?
       setTimeout(function() {
         gameOver("draw");
       }, gameOverDelay);
-      
+
     } else {
       game.playerTurn = !game.playerTurn; // Toggle turn between pc and player.
       if (!game.playerTurn) {
@@ -130,52 +125,47 @@ var game = {
   }
 
   function makePlay(mark, row, col) {
-    // Saving move to game    
+    // Saving move to game
     game.board[row][col] = mark;
     game.turnsPlayed++;
-    
+
     var cellId = "#c" + row + "" + col;
     // Stylising game cell to reflect an ai move.
     $(cellId).text(mark);
     $(cellId).addClass("cell-selected");
-    
+
   }
 
   function minimax(state, depth){
-    // Inspired by http://neverstopbuilding.com/minimax
-    
-    // Creating a replicated object of the game state to avoid
-    // editing the existing game state (it has been passed 'byRef')
-    // See http://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-deep-clone-an-object-in-javascript/5344074#5344074
-    var gameState = JSON.parse(JSON.stringify(state));
-    
+   var gameState = JSON.parse(JSON.stringify(state));
+
     if (gameState.gameOver){
       // If game is in an end state (win, lose, draw) return corresponding score (10, -10, 0)
       return getScore(gameState, depth);
-      
+
     } else {
       depth++; // Iterate depth as algorithm gets recursively deeper. Used to choose moves that prolong defeat, hasten victory.
       var moves = []; // Used to store all possible moves in this current game state.
       var scores = []; // Used to store the corresponding scores resulting from each of those moves.
-      
+
       moves = generateAllAvailableMoves(gameState); // Generate an array of all available coordinates on the game board.
-      
+
       for (var i = 0; i < moves.length; i++) {
         // For each possible move, create a simulation game state where the move has been played.
         var possibleGameState = generatePossibleGame(gameState, moves[i]);
         // Then store the resultant score, recursively calling the minimax algorithm.
         scores.push(minimax(possibleGameState, depth));
       }
-      
+
       if (gameState.playerTurn) {
         // MAX
         var maxScoreIndex = findIndexOfMax(scores); // In the case of it being the protagonist's turn, find the highest equating score.
         game.nextMove = moves[maxScoreIndex]; // Store move to be executed.
-        return scores[maxScoreIndex]; 
+        return scores[maxScoreIndex];
       } else {
         // MIN
         var minScoreIndex = findIndexOfMin(scores); // In the case of it being the opponent's turn, find the lowest equating score.
-        game.nextMove = moves[minScoreIndex]; 
+        game.nextMove = moves[minScoreIndex];
         return scores[minScoreIndex];
       }
     }
@@ -198,7 +188,7 @@ var game = {
     const rowLength = 3;
     const colLength = 3;
     var availableMoves = [];
-    
+
     for (var row = 0; row < rowLength; row++){
       for (var col = 0; col < colLength; col++){
         if (spaceFree(gameState.board, row, col)){
@@ -213,7 +203,7 @@ var game = {
   // Creates a simulated game state when a specified move is executed.
   function generatePossibleGame(state, move){
     var gameState = JSON.parse(JSON.stringify(state));
-    
+
     // Execute the move
     if (gameState.playerTurn){
       gameState.board[move[0]][move[1]] = gameState.playerMark;
@@ -221,7 +211,7 @@ var game = {
       gameState.board[move[0]][move[1]] = gameState.aiMark;
     }
     gameState.turnsPlayed++;
-    
+
     // Check if the move has resulted in an end game state.
     if (checkWin(gameState)) {
       gameState.gameOver = true;
@@ -236,7 +226,7 @@ var game = {
     } else {
       gameState.playerTurn = !gameState.playerTurn;
     }
-    
+
     return gameState;
   }
 
@@ -309,24 +299,6 @@ var game = {
     return false;
   }
 
-  /** 
-
-  // Pre-Minimax AI, randomly selecting a space on the board.
-
-  function aiGenerateRandomPlay() {
-    var randRow = Math.floor(Math.random() * 3);
-    var randCol = Math.floor(Math.random() * 3);
-    var validMove = spaceFree(randRow, randCol);
-    while (!validMove) {
-      randRow = Math.floor(Math.random() * 3);
-      randCol = Math.floor(Math.random() * 3);
-      validMove = spaceFree(randRow, randCol);
-    }
-    return [randRow, randCol];
-  }
-
-  */
-
 
   // Checking whether the last move made has triggered a win, and if so triggers a win animation.
   function hasWon() {
@@ -343,7 +315,7 @@ var game = {
       $("#c00").addClass("cell-win");
       $("#c11").addClass("cell-win");
       $("#c22").addClass("cell-win");
-      
+
       return true;
     }
 
@@ -357,7 +329,7 @@ var game = {
       $("#c02").addClass("cell-win");
       $("#c11").addClass("cell-win");
       $("#c20").addClass("cell-win");
-      
+
       return true;
     }
 
@@ -401,17 +373,17 @@ var game = {
 
     if (winCase === game.playerMark) {
       // Player wins
-      $("#game-end-heading").text("You have claimed victory.");
-      $("#game-end-subheading").text("May you bathe in tic-tac-toe glory.");
-      
+      // $("#game-end-heading").text("You have claimed victory.");
+      $("#game-end-subheading").text("Congratulations on this brilliant effort.");
+
     } else if (winCase === game.aiMark) {
       // PC wins
-      $("#game-end-heading").text("Alas, the computer has claimed victory!");
-      $("#game-end-subheading").text("May they bathe their circuits in tic-tac-toe glory.");
+      // $("#game-end-heading").text("Alas, the computer has claimed victory!");
+      $("#game-end-subheading").text("OOO - Bad Luck, Try your luck again!");
     } else {
       // Draw
-      $("#game-end-heading").text("X and O, ancient enemies, have concluded their bout in a draw.");
-      $("#game-end-subheading").text("Perhaps their feud will be settled in another life, another dimension...");
+      // $("#game-end-heading").text("X and O, ancient enemies, have concluded their bout in a draw.");
+      $("#game-end-subheading").text("Its Tie, Never give up!");
     }
   }
 
@@ -425,7 +397,7 @@ var game = {
     $(".game-cell").empty();
     $(".cell").removeClass("cell-selected");
     $(".cell").removeClass("cell-win");
-    
+
     game.board = [
       [null, null, null],
       [null, null, null],

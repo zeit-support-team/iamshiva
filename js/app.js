@@ -21,5 +21,5 @@ angular
     });
   })
   .controller("mainController", function ($scope, $location) {
-      
+
 });
