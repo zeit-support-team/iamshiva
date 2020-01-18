@@ -21,6 +21,7 @@
         <li><a href="https://www.instagram.com/shivajangra03/"><i class="icon-instagram"></i></a></li>
         <li><a href="https://www.facebook.com/Shiva.jangra3"><i class="icon-facebook"></i></a></li>
       </ul>
+      </p>
     </div>
   </aside>
   <div id="colorlib-main">
@@ -52,23 +53,23 @@
           </div>
           <div class="col-md-3">
           </div>
-          <div class="row col-md-6">
-            <div class="col-md-2">
+          <div class="row col-md-6 profile_link">
+            <div class="flex">
               <a href="https://www.linkedin.com/in/shiva-jangra-103176a0/"><i class="icon-linkedin"></i></a>
             </div>
-            <div class="col-md-2">
+            <div class="flex">
               <a href="https://github.com/shivajangra"><i class="icon-github"></i></a>
             </div>
-            <div class="col-md-2">
+            <div class="flex">
               <a href="https://codepen.io/shivajangra"><i class="icon-codepen"></i></a>
             </div>
-            <div class="col-md-2">
+            <div class="flex">
               <a href="https://twitter.com/shivajangra03"><i class="icon-twitter"></i></a>
             </div>
-            <div class="col-md-2">
+            <div class="flex">
               <a href="https://www.instagram.com/shivajangra03/"><i class="icon-instagram"></i></a>
             </div>
-            <div class="col-md-2">
+            <div class="flex">
               <a href="https://www.facebook.com/Shiva.jangra3"><i class="icon-facebook"></i></a>
             </div>
           </div>
@@ -456,46 +457,54 @@
           <h2 class="h4 font-weight-bold">Contact Information</h2>
         </div>
         <div class="w-100"></div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <p><span>Address:</span> Q-271 South City II, Gurugram, India - 122018</p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <p><span>Phone:</span> <a href="tel://+91822999949">+91 8222999949</a></p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
           <p><span>Email:</span> <a href="mailto:shivajangra303@gmail.com">shivajangra303@gmail.com</a></p>
         </div>
-        <div class="col-md-3">
+        <!-- <div class="col-md-3">
           <p><span>Website</span> <a href="http://imshiva.in">imshiva.in</a></p>
-        </div>
+        </div> -->
       </div>
       <div class="row block-9">
         <div class="col-md-6 order-md-last pr-md-5">
-          <form action="#">
+          <div class="cp-article">
+            <h6 class="font-weight-bold">Let's Get In Touch</h6>
+            <p>I'm a software engineer and technologist passionate about developing solutions.
+              If you're a like-minded individual or could use someone like me on your team or on projects, I'd love to hear from you!
+              I strongly believe that all projects should be fulfill all requirements.
+            </p>
+            <p>
+              I am currently available to be a part of technical team. You can <a href="mailto:shivajangra303@gmail.com" class="link"><strong>send me an email</strong></a> or leave a message via the form. I will be get back to you soon.
+            </p>
+        </div>
+
+        </div>
+        <div class="col-md-6 order-md-last pr-md-5">
+          <form id="form_Id" action="#">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Your Name">
+              <input type="text" name="name" class="letter form-control" placeholder="Your Name" required>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Your Email">
+              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Subject">
-            </div>
-            <div class="form-group">
-              <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+              <textarea name="message" cols="30" rows="7" class="form-control" placeholder="Leave a Message" required></textarea>
             </div>
             <div class="form-group">
               <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
             </div>
           </form>
-
         </div>
-
       </div>
     </div>
   </section>
-  
- 
+
+
   <footer class="ftco-footer ftco-bg-dark ftco-section">
     <div class="container px-md-5">
       <div class="row mb-5">
@@ -539,3 +548,30 @@
   </footer>
 </div>
 </div>
+<script>
+/*for services*/
+$(function(){$(".number").on("keypress",function(e){if(e.charCode<48||e.charCode>57)return!1}),
+$(".letter").on("keypress",function(e){if((e.charCode > 48 && e.charCode<65)||e.charCode>122)return!1});});
+
+let ValidateEmail = (mail) => {
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+  {
+    return (true)
+  }
+  return (false)
+}
+$("#form_Id").submit(function( e ) {
+  e.preventDefault();
+  // let formObj = {};
+  //  var inputs = $( this ).serializeArray();
+  //  $.each(inputs, function (i, input) {
+  //    if(input.name === 'email'){
+  //      if(!ValidateEmail(input.value)){
+  //
+  //      }
+  //    }
+  //      formObj[input.name] = input.value;
+  //  });
+   
+});
+</script>

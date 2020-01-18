@@ -8543,3 +8543,12 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+
+
+    .profile_link .flex {
+        padding: 10px 15px;
+        flex: 1;
+    }
+    .fieldError{
+      border: 1px solid #f25d23;
+    }
