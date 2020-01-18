@@ -1,2 +1,2 @@
-# iamshiva
-My Personal blog
+# Jshiva - Shiva Jangra's website
+my ceevee
