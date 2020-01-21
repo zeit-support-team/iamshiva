@@ -24,7 +24,7 @@ angular
       // $scope.pathurl = $location.path();
       $scope.pathurl = function(){
         return $location.path(); 
-      }
+      } 
 });
 
 let ValidateEmail = (mail) => {

@@ -1,13 +1,13 @@
-<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+<a onclick="nav_toggle('nav_toggle')" id="nav_toggle" class="cursor js-colorlib-nav-toggle colorlib-nav-toggle"><i class="cursor"></i></a>
 <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
   <h1 id="colorlib-logo"><a href="index.html">Jshiva<span>.</span></a></h1>
   <nav id="colorlib-main-menu" role="navigation">
     <ul>
-      <li class="{{pathurl() == '/'?'colorlib-active':''}}"><a href="/">About</a></li>
-      <li class="{{pathurl() == '/articles'?'colorlib-active':''}}"><a href="/articles">Articles</a></li>
-      <li class="{{pathurl() == '/portfolio'?'colorlib-active':''}}"><a href="/portfolio">PortFolio</a></liclass="{{pathurl == '/articles'?'colorlib-active':''}}">
-      <li class="{{pathurl() == '/contact'?'colorlib-active':''}}"><a href="/contact">Contact</a></li>
-      <li class="{{pathurl() == '/play'?'colorlib-active':''}}"><a href="/play">Play with Me! &#129299;</a></li>
+      <li onclick="reset_aside()" class="{{pathurl() == '/'?'colorlib-active':''}}"><a href="/">About</a></li>
+      <li onclick="reset_aside()" class="{{pathurl() == '/articles'?'colorlib-active':''}}"><a href="/articles">Articles</a></li onclick="reset_aside()">
+      <li onclick="reset_aside()" class="{{pathurl() == '/portfolio'?'colorlib-active':''}}"><a href="/portfolio">PortFolio</a></liclass="{{pathurl == '/articles'?'colorlib-active':''}}">
+      <li onclick="reset_aside()" class="{{pathurl() == '/contact'?'colorlib-active':''}}"><a href="/contact">Contact</a></li onclick="reset_aside()">
+      <li onclick="reset_aside()" class="{{pathurl() == '/play'?'colorlib-active':''}}"><a href="/play">Play with Me! &#129299;</a></li onclick="reset_aside()">
     </ul>
   </nav>
   <div class="colorlib-footer">
@@ -22,4 +22,18 @@
     </ul>
   </div>
 </aside>
- 
+ <script>
+    nav_toggle=(ev)=>{
+       if($("#"+ev).hasClass("active")){
+        $('body').removeClass('offcanvas');
+        $("#"+ev).removeClass("active").css({left: '0'});
+      }else{
+        $('body').addClass('offcanvas');
+        $("#"+ev).addClass("active").css({left: '-60px'});
+       } 
+   }
+   reset_aside=()=>{
+        $('body').removeClass('offcanvas');
+        $("#nav_toggle").removeClass("active").css({left: '0'});
+   }
+ </script>
