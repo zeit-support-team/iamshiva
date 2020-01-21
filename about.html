@@ -1,29 +1,5 @@
 <div id="colorlib-page">
-  <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
-  <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
-    <h1 id="colorlib-logo"><a href="index.html">Jshiva<span>.</span></a></h1>
-    <nav id="colorlib-main-menu" role="navigation">
-      <ul>
-        <li class="colorlib-active"><a href="/">About</a></li>
-        <li><a href="/articles">Articles</a></li>
-        <li><a href="/portfolio">PortFolio</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="/play">Play with Me! &#129299;</a></li>
-      </ul>
-    </nav>
-    <div class="colorlib-footer">
-      <p>
-        <ul>
-        <li><a href="https://www.linkedin.com/in/shiva-jangra-103176a0/"><i class="icon-linkedin"></i></a></li>
-        <li><a href="https://github.com/shivajangra"><i class="icon-github"></i></a></li>
-        <li><a href="https://codepen.io/shivajangra"><i class="icon-codepen"></i></a></li>
-        <li><a href="https://twitter.com/shivajangra03"><i class="icon-twitter"></i></a></li>
-        <li><a href="https://www.instagram.com/shivajangra03/"><i class="icon-instagram"></i></a></li>
-        <li><a href="https://www.facebook.com/Shiva.jangra3"><i class="icon-facebook"></i></a></li>
-      </ul>
-      </p>
-    </div>
-  </aside>
+  <div ng-include="'leftNav.html'"></div> 
   <div id="colorlib-main">
     <div class="hero-wrap js-fullheight" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
@@ -485,6 +461,9 @@
 
         </div>
         <div class="col-md-6 order-md-last pr-md-5">
+          <div id="success" class="alert alert-success">
+            <strong>Success!</strong> I will be get back to you soon...
+          </div>
           <form id="form_Id" action="#">
             <div class="form-group">
               <input type="text" name="name" class="letter form-control" placeholder="Your Name" required>
@@ -548,30 +527,24 @@
   </footer>
 </div>
 </div>
-<script>
-/*for services*/
+<script> 
 $(function(){$(".number").on("keypress",function(e){if(e.charCode<48||e.charCode>57)return!1}),
-$(".letter").on("keypress",function(e){if((e.charCode > 48 && e.charCode<65)||e.charCode>122)return!1});});
+$(".letter").on("keypress",function(e){if((e.charCode > 48 && e.charCode<65)||e.charCode>122)return!1});
+  $('#success').hide();});
 
-let ValidateEmail = (mail) => {
- if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-  {
-    return (true)
-  }
-  return (false)
-}
 $("#form_Id").submit(function( e ) {
   e.preventDefault();
-  // let formObj = {};
-  //  var inputs = $( this ).serializeArray();
-  //  $.each(inputs, function (i, input) {
-  //    if(input.name === 'email'){
-  //      if(!ValidateEmail(input.value)){
-  //
-  //      }
-  //    }
-  //      formObj[input.name] = input.value;
-  //  });
-   
+  let formObj = {};
+   var inputs = $( this ).serializeArray();
+   $.each(inputs, function (i, input) {
+     document.getElementsByName(input.name)[0].value = ''; 
+    //  if(input.name === 'email'){ 
+    //  }
+    //    formObj[input.name] = input.value;
+   });
+   $('#success').show();
+   setTimeout(function(){
+    $('#success').hide();
+   },5000)
 });
 </script>

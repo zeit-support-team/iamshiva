@@ -1,28 +1,5 @@
 <div id="colorlib-page">
-	<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
-	<aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
-	  <h1 id="colorlib-logo"><a href="index.html">Jshiva<span>.</span></a></h1>
-	  <nav id="colorlib-main-menu" role="navigation">
-		<ul>
-		  <li><a href="/">About</a></li>
-		  <li><a href="/articles">Articles</a></li>
-		  <li><a href="/portfolio">PortFolio</a></li>
-		  <li class="colorlib-active"><a href="/contact">Contact</a></li>
-		  <li><a href="/play">Play with Me! &#129299;</a></li>
-		</ul>
-	  </nav>
-	  <div class="colorlib-footer">
-		<p>
-		  <ul>
-		  <li><a href="https://www.linkedin.com/in/shiva-jangra-103176a0/"><i class="icon-linkedin"></i></a></li>
-		  <li><a href="https://github.com/shivajangra"><i class="icon-github"></i></a></li>
-		  <li><a href="https://codepen.io/shivajangra"><i class="icon-codepen"></i></a></li>
-		  <li><a href="https://twitter.com/shivajangra03"><i class="icon-twitter"></i></a></li>
-		  <li><a href="https://www.instagram.com/shivajangra03/"><i class="icon-instagram"></i></a></li>
-		  <li><a href="https://www.facebook.com/Shiva.jangra3"><i class="icon-facebook"></i></a></li>
-		</ul>
-	  </div>
-	</aside>
+	<div ng-include="'leftNav.html'"></div> 
 		<div id="colorlib-main">
 			<section class="ftco-section contact-section">
 		    <div class="container">
@@ -59,21 +36,24 @@
 
 		        </div>
 		        <div class="col-md-6 order-md-last pr-md-5">
-		          <form id="form_Id" action="#">
-		            <div class="form-group">
-		              <input type="text" name="name" class="letter form-control" placeholder="Your Name" required>
-		            </div>
-		            <div class="form-group">
-		              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-		            </div>
-		            <div class="form-group">
-		              <textarea name="message" cols="30" rows="7" class="form-control" placeholder="Leave a Message" required></textarea>
-		            </div>
-		            <div class="form-group">
-		              <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-		            </div>
-		          </form>
-		        </div>
+					<div id="success" class="alert alert-success">
+					  <strong>Success!</strong> I will be get back to you soon...
+					</div>
+					<form id="form_Id" action="#">
+					  <div class="form-group">
+						<input type="text" name="name" class="letter form-control" placeholder="Your Name" required>
+					  </div>
+					  <div class="form-group">
+						<input type="email" name="email" class="form-control" placeholder="Your Email" required>
+					  </div>
+					  <div class="form-group">
+						<textarea name="message" cols="30" rows="7" class="form-control" placeholder="Leave a Message" required></textarea>
+					  </div>
+					  <div class="form-group">
+						<input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+					  </div>
+					</form>
+				  </div>
 		      </div>
 		    </div>
 		  </section>
@@ -113,21 +93,26 @@
 		  </footer>
 		</div>
 		</div>
-		<script>
-		$(function(){$(".number").on("keypress",function(e){if(e.charCode<48||e.charCode>57)return!1}),
-		$(".letter").on("keypress",function(e){if((e.charCode > 48 && e.charCode<65)||e.charCode>122)return!1});});
-
-		let ValidateEmail = (mail) => {
-		 if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
-		  {
-		    return (true)
-		  }
-		  return (false)
-		}
-		$("#form_Id").submit(function( e ) {
-		  e.preventDefault();
-		  
-		   // ValidateEmail();
-
-		});
-		</script>
+		<script> 
+			$(function(){$(".number").on("keypress",function(e){if(e.charCode<48||e.charCode>57)return!1}),
+			$(".letter").on("keypress",function(e){if((e.charCode > 48 && e.charCode<65)||e.charCode>122)return!1});
+			  $('#success').hide();}); 
+			$("#form_Id").submit(function( e ) {
+			  e.preventDefault();
+			  let formObj = {};
+			   var inputs = $( this ).serializeArray();
+			   $.each(inputs, function (i, input) {
+				 document.getElementsByName(input.name)[0].value = ''; 
+				//  if(input.name === 'email'){
+				//    if(!ValidateEmail(input.value)){
+			  
+				//    }
+				//  }
+				//    formObj[input.name] = input.value;
+			   });
+			   $('#success').show();
+			   setTimeout(function(){
+				$('#success').hide();
+			   },5000)
+			});
+			</script>

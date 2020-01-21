@@ -21,5 +21,16 @@ angular
     });
   })
   .controller("mainController", function ($scope, $location) {
-
+      // $scope.pathurl = $location.path();
+      $scope.pathurl = function(){
+        return $location.path(); 
+      }
 });
+
+let ValidateEmail = (mail) => {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+   {
+     return (true)
+   }
+   return (false)
+ }
