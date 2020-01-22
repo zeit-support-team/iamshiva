@@ -5,17 +5,17 @@ angular
   .config(function ($routeProvider,$locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider.when('/', {
-      templateUrl: '../about'
+      templateUrl: '../about.html'
     }).when('/articles', {
-      templateUrl: '../articles'
+      templateUrl: '../articles.html'
     }).when('/portfolio', {
-      templateUrl: '../portfolio'
+      templateUrl: '../portfolio.html'
     }).when('/play', {
-      templateUrl: '../services'
+      templateUrl: '../services.html'
     }).when('/contact', {
-      templateUrl: '../contact'
+      templateUrl: '../contact.html'
     }).when('/article/{id}', {
-      templateUrl: '../article_detail'
+      templateUrl: '../article_detail.html'
     }).otherwise({
         redirectTo: "/"
     });
