@@ -21,9 +21,6 @@ angular
     });
   })
   .controller("mainController", function ($scope, $location) {
-     (()=>{
-       $location.path($location.path());
-     })()
       // $scope.pathurl = $location.path();
       $scope.pathurl = function(){
         return $location.path(); 
