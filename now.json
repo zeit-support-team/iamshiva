@@ -4,12 +4,19 @@
   "routes": [
     {
       "src": "/",
-      "dest": "./about.html"
+      "dest": "/about.html"
     },
     {
-      "src": "*",
-      "dest": "/app.js",
-      "methods": ["GET"]
-    }
-  ]
+      "src": "/articles",
+      "dest": "/articles.html"
+    },
+  ],
+  {
+  "rewrites": [
+    { "source": "/articles", "destination": "/articles.html" },
+    { "source": "/play", "destination": "/services.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/portfolio", "destination": "/portfolio.html" },
+    ]
+  }
 }
