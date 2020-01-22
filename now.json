@@ -11,12 +11,10 @@
       "dest": "/articles.html"
     },
   ],
-  {
   "rewrites": [
     { "source": "/articles", "destination": "/articles.html" },
     { "source": "/play", "destination": "/services.html" },
     { "source": "/contact", "destination": "/contact.html" },
     { "source": "/portfolio", "destination": "/portfolio.html" }
-    ]
-  }
+   ]
 }
