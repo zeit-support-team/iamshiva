@@ -3,7 +3,7 @@
 angular
   .module('myApp', ['ngRoute'])
   .config(function ($routeProvider,$locationProvider) {
-//     $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
     $routeProvider.when('/', {
       templateUrl: '../about.html'
     }).when('/articles', {

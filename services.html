@@ -2,9 +2,9 @@
 <div id="shiva-page">
 	<div ng-include="'leftNav.html'"></div> 
 		<div id="shiva-main">
-			<div class="hero-wrap js-fullheight" style="background-image: url(images/bg_1.jpg);" data-stellar-background-ratio="0.5">
+			<div class="hero-wrap js-fullheight" id="parallax" style="background-image: url(images/shiva_bg.jpg);" data-stellar-background-ratio="0.5">
 				<div class="overlay"></div>
-				<div class="img mb-2" style="background-image: url(images/author.jpg);width: 100px;height: 100px;border-radius: 50%;"></div>
+				<div class="img mb-2" style="background-image: url(images/shiva.jpg);width: 100px;height: 100px;border-radius: 50%;"></div>
 				<div class="js-fullheight d-flex justify-content-center">
 					<div class="col-md-8 text text-center">
 					  <div class="desc">
@@ -63,5 +63,24 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
   <script src="js/game.js"></script>
-  <script src="js/main.js"></script>
-  <!-- https://codepen.io/allanpooley/pen/qrrmoR -->
+  <script src="js/main.js"></script> 
+  <script>
+  (function() {
+    // Add event listener
+    document.addEventListener("mousemove", parallax);
+    const elem = document.querySelector("#parallax");
+    // Magic happens here
+    function parallax(e) {
+        let _w = window.innerWidth/2;
+        let _h = window.innerHeight/2;
+        let _mouseX = e.clientX;
+        let _mouseY = e.clientY;
+        let _depth1 = `${50 - (_mouseX - _w) * 0.01}% ${50 - (_mouseY - _h) * 0.01}%`;
+        let _depth2 = `${50 - (_mouseX - _w) * 0.02}% ${50 - (_mouseY - _h) * 0.02}%`;
+        let _depth3 = `${50 - (_mouseX - _w) * 0.06}% ${50 - (_mouseY - _h) * 0.06}%`;
+        let x = `${_depth3}, ${_depth2}, ${_depth1}`;
+        elem.style.backgroundPosition = x;
+    }
+
+	})();
+</script>

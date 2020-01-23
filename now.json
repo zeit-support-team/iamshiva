@@ -1,16 +1,6 @@
 {
   "version": 2,
   "builds": [{ "src": "app.js", "use": "@now/node-server" }],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/about.html"
-    },
-    {
-      "src": "/articles",
-      "dest": "/articles.html"
-    },
-  ],
   "rewrites": [
     { "source": "/articles", "destination": "/articles.html" },
     { "source": "/play", "destination": "/services.html" },
